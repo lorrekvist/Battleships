@@ -16,9 +16,17 @@ public class Gameboard implements IBoard {
     }
 
     @Override
-    public ArrayList<Integer> hitSquares(int hitCoord) {
+    public boolean hitSquares(int hitCoord) {
         hits.add(hitCoord);
-        return hits;
+        if(placements.contains(hitCoord)){
+            System.out.println("Its a hit!");
+
+            return true;
+
+        }else{
+            System.out.println("Its a miss!");
+            return false;
+        }
     }
     public boolean isHit(){
         return true;

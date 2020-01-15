@@ -6,6 +6,7 @@ Abstrakta klassen hanterar båten
 
 
 import javax.management.monitor.GaugeMonitor;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -113,14 +114,22 @@ public class Game {
                 if (playerOne.attackCoordList.size() < 0) {
                     System.out.println("Your shots: " + playerOne.attackCoordList);
                 }
-                gameHelper.PlayerOneShoot();
-                playerTwoBoard.hitSquare
+                int shotSquare = gameHelper.PlayerShoot(playerOne.attackCoordList);
+                if(playerTwoBoard.hitSquares(shotSquare)) {
+                    playerOne.playerLives--;
+                }
+                playerOne.attackCoordList.add(shotSquare);
                 round++;
+                System.out.println(playerOne.inPlay());
+                System.out.println(playerTwo.inPlay());
             } else {
                 if (playerTwo.attackCoordList.size() < 0) {
                     System.out.println("Your shots: " + playerTwo.attackCoordList);
                 }
-                gameHelper.PlayerTwoShoot();
+                int shotSquare = gameHelper.PlayerShoot(playerTwo.attackCoordList);
+                if(playerOneBoard.hitSquares(shotSquare)) {
+                    playerTwo.playerLives--;
+                }
                 round++;
             }
         }while(playerOne.inPlay() && playerTwo.inPlay());

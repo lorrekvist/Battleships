@@ -10,7 +10,7 @@ public class Player implements IPlayer{
 
     @Override
     public boolean inPlay() {
-        return false;
+        return true;
     }
 
     @Override

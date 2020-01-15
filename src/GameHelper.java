@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameHelper {
@@ -28,13 +29,16 @@ public class GameHelper {
         return xCoord * yCoord;
     }
 
-    public int PlayerOneShoot() {
-        System.out.println("Player one choose coordinate to bomb: ");
-        return getCoordinates();
-    }
+    public int PlayerShoot(ArrayList<Integer> attackCoordList) {
+        System.out.println("choose coordinate to bomb: ");
+        int currentShot = getCoordinates();
+        if(attackCoordList.contains(currentShot)){
+            do {
+                System.out.println("Youve already fired on this position, pick another.");
+                currentShot = getCoordinates();
+            }while(attackCoordList.contains(currentShot));
+        }
 
-    public int PlayerTwoShoot() {
-        System.out.println("Player two choose coordinate to bomb: ");
-        return getCoordinates();
+        return currentShot;
     }
 }
