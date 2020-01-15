@@ -5,6 +5,7 @@ Abstrakta klassen hanterar båten
  */
 
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -50,12 +51,13 @@ public class Game {
 
     private void initiatePlayerOne(boolean pvpGame){
         Player playerOne = new Player();
-        Gameboard playerOneBoard = new Gameboard();
+        GameBoard playerOneBoard = new GameBoard();
         do {
             System.out.println("Player one choosing coordinate to place boat on.");
-            playerOneBoard.boatPlacements(gameHelper.getCoordinates());
+            playerOneBoard.addBoatToBoard(gameHelper.getCoordinates());
             System.out.println("Player one placements: " + playerOneBoard.boatPlacementsCoordsList);
         } while(playerOneBoard.boatPlacementsCoordsList.size() <= 3);
+        playerOneBoard.printBoardWithBoats();
         if (pvpGame){
             startPvPGame(playerOne, playerOneBoard);
         } else {
@@ -63,65 +65,63 @@ public class Game {
         }
     }
 
-    private void startPvPGame(Player playerOne, Gameboard playerOneBoard){
+    private void startPvPGame(Player playerOne, GameBoard playerOneBoard){
         Player playerTwo = new Player();
-        Gameboard playerTwoBoard = new Gameboard();
+        GameBoard playerTwoBoard = new GameBoard();
         do {
             System.out.println("Player two choosing coordinate to place boat on.");
-            playerTwoBoard.boatPlacements(gameHelper.getCoordinates());
+            playerTwoBoard.addBoatToBoard(gameHelper.getCoordinates());
             System.out.println("Player two placements: " + playerTwoBoard.boatPlacementsCoordsList);
-        }while(playerTwoBoard.boatPlacementsCoordsList.size()<=3);
+        } while(playerTwoBoard.boatPlacementsCoordsList.size() <= 3);
+        playerTwoBoard.printBoardWithBoats();
         System.out.println("Game is live!");
         startPvPWar(playerOne, playerTwo, playerOneBoard, playerTwoBoard);
     }
 
-    private void startPvEGame(Player playerOne, Gameboard playerOneBoard){
+    private void startPvEGame(Player playerOne, GameBoard playerOneBoard){
         Player bot = new Player();
-        Gameboard botBoard = new Gameboard();
-        Random random = new Random();
-        for(int i = 0; i <= 3 ; i++){
-            int randomInt = random.nextInt(9)+1;
-            if(botBoard.boatPlacementsCoordsList.contains(randomInt)){
-                i--;
-            }else {
-                botBoard.boatPlacementsCoordsList.add(randomInt);
-            }
-    }
-        System.out.println(botBoard.boatPlacementsCoordsList);
-        //startPvEWar(playerOne, bot, playerOneBoard, botBoard);
-
+        GameBoard botBoard = new GameBoard();
+        gameHelper.addBoatsToBotBoatPlacementsList(botBoard.boatPlacementsCoordsList);
+        System.out.println("Bot placements: " + botBoard.boatPlacementsCoordsList);
+        botBoard.printBoardWithBoats();
+        System.out.println("Game is live!");
+        startPvEWar(playerOne, bot, playerOneBoard, botBoard);
     }
 
-    private void startPvPWar(Player playerOne, Player playerTwo, Gameboard playerOneBoard, Gameboard playerTwoBoard){
+    private void startPvPWar(Player playerOne, Player playerTwo, GameBoard playerOneBoard, GameBoard playerTwoBoard){
         int round = 0;
         do{
             if(round % 2 == 0) {
-                if (playerOne.attackCoordList.size() < 0) {
-                    System.out.println("Your shots: " + playerOne.attackCoordList);
-                }
-                int shotSquare = gameHelper.PlayerShoot(playerOne.attackCoordList, "one");
-                playerOne.attackCoordList.add(shotSquare);
-                if(playerTwoBoard.isHit(shotSquare)) {
-                    playerTwo.playerLives--;
-                }
-                playerOne.attackCoordList.add(shotSquare);
+                gameHelper.playerAttackMove(playerOne, playerTwo, playerTwoBoard);
             } else {
-                if (playerTwo.attackCoordList.size() < 0) {
-                    System.out.println("Your shots: " + playerTwo.attackCoordList);
-                }
-                int shotSquare = gameHelper.PlayerShoot(playerTwo.attackCoordList, "two");
-                playerTwo.attackCoordList.add(shotSquare);
-                if(playerOneBoard.isHit(shotSquare)) {
-                    playerOne.playerLives--;
-                }
+                gameHelper.playerAttackMove(playerTwo, playerOne, playerOneBoard);
             }
             round++;
-        } while(playerOne.inPlay() && playerTwo.inPlay());
+        } while(playerOne.hasBoatsLeft() && playerTwo.hasBoatsLeft());
 
-        if (playerOne.inPlay()) {
+        if (playerOne.hasBoatsLeft()) {
             System.out.println("Player one is the winner!");
         } else {
             System.out.println("Player two is the winner!");
+        }
+        start();
+    }
+
+    private void startPvEWar(Player playerOne, Player bot, GameBoard playerOneBoard, GameBoard botBoard) {
+        int round = 0;
+        do{
+            if(round % 2 == 0) {
+                gameHelper.playerAttackMove(playerOne, bot, botBoard);
+            } else {
+                gameHelper.botAttackMove(bot, playerOne, playerOneBoard);
+            }
+            round++;
+        } while(playerOne.hasBoatsLeft() && bot.hasBoatsLeft());
+
+        if (playerOne.hasBoatsLeft()) {
+            System.out.println("Player one is the winner!");
+        } else {
+            System.out.println("Bot is the winner!");
         }
         start();
     }

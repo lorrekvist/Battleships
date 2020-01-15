@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public interface IBoard {
-    ArrayList<Integer> boatPlacements(int placementCoord);
-    boolean isHit(int hitCoord);
+    ArrayList<Integer> addBoatToBoard(int placementCoordinates);
+    boolean boardIsBombed(int bombedCoordinate);
+    void printBoardWithBoats();
+    void printBoardWhenBombed(int bombedCoordinate, boolean hit);
 }

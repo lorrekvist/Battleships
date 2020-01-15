@@ -1,17 +1,16 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Player implements IPlayer{
-    ArrayList<Integer> attackCoordList = new ArrayList<Integer>();
-    int playerLives = lifeCounter;
+    ArrayList<Integer> attackedCoordinatesList = new ArrayList<Integer>();
+    int boatsLeft = boats;
 
     @Override
-    public boolean inPlay() {
-        return playerLives > 0;
+    public boolean hasBoatsLeft() {
+        return boatsLeft > 0;
     }
 
     @Override
-    public ArrayList<Integer> attackCoords() {
-        return attackCoordList;
+    public ArrayList<Integer> coordinatesAttacked() {
+        return attackedCoordinatesList;
     }
 }
