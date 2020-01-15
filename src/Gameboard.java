@@ -1,34 +1,28 @@
 import java.util.ArrayList;
 
 public class Gameboard implements IBoard {
-    ArrayList<Integer> placements = new ArrayList<Integer>(9);
+    ArrayList<Integer> boatPlacementsCoordsList = new ArrayList<Integer>(9);
     ArrayList<Integer> hits = new ArrayList<Integer>(9);
-    int hitSquare;
 
     @Override
     public ArrayList<Integer> boatPlacements(int placementCoord) {
-        if(placements.contains(placementCoord)){
-            System.out.println("Youve already picked that coordinate. please choose another.");
-        }else{
-            placements.add(placementCoord);
+        if (boatPlacementsCoordsList.contains(placementCoord)){
+            System.out.println("Coordinate already picked, please choose another.");
+        } else {
+            boatPlacementsCoordsList.add(placementCoord);
         }
-        return placements;
+        return boatPlacementsCoordsList;
     }
 
     @Override
-    public boolean hitSquares(int hitCoord) {
+    public boolean isHit(int hitCoord) {
         hits.add(hitCoord);
-        if(placements.contains(hitCoord)){
+        if (boatPlacementsCoordsList.contains(hitCoord)){
             System.out.println("Its a hit!");
-
             return true;
-
-        }else{
+        } else {
             System.out.println("Its a miss!");
             return false;
         }
-    }
-    public boolean isHit(){
-        return true;
     }
 }

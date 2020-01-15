@@ -3,14 +3,11 @@ import java.util.Scanner;
 
 public class Player implements IPlayer{
     ArrayList<Integer> attackCoordList = new ArrayList<Integer>();
-
-
     int playerLives = lifeCounter;
-    Scanner scan = new Scanner(System.in);
 
     @Override
     public boolean inPlay() {
-        return true;
+        return playerLives > 0;
     }
 
     @Override

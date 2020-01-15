@@ -8,20 +8,20 @@ public class GameHelper {
 
         do{
             try{
-                System.out.println("Input X coordinate, 1-3: ");
+                System.out.print("Input X coordinate, 1-3: ");
                 xCoord = new Scanner(System.in).nextInt();
             }catch(Exception InputMismatchException){
-                System.out.println("Please input an integer 1-3, nothing else.");
+                System.out.print("Please input an integer 1-3, nothing else.");
                 getCoordinates();
             }
 
         }while(xCoord > 3 || xCoord < 1);
         do{
             try{
-                System.out.println("Input Y coordinate, 1-3: ");
+                System.out.print("Input Y coordinate, 1-3: ");
                 yCoord = new Scanner(System.in).nextInt();
             }catch(Exception InputMismatchException){
-                System.out.println("Please input an integer 1-3, nothing else.");
+                System.out.print("Please input an integer 1-3, nothing else.");
                 getCoordinates();
             }
         }while(yCoord > 3 || yCoord < 1);
@@ -29,16 +29,15 @@ public class GameHelper {
         return xCoord * yCoord;
     }
 
-    public int PlayerShoot(ArrayList<Integer> attackCoordList) {
-        System.out.println("choose coordinate to bomb: ");
+    public int PlayerShoot(ArrayList<Integer> attackCoordList, String player) {
+        System.out.println("Player " + player + " choosing coordinates to bomb.");
         int currentShot = getCoordinates();
         if(attackCoordList.contains(currentShot)){
             do {
-                System.out.println("Youve already fired on this position, pick another.");
+                System.out.println("You've already fired on this position, pick another.");
                 currentShot = getCoordinates();
-            }while(attackCoordList.contains(currentShot));
+            } while(attackCoordList.contains(currentShot));
         }
-
         return currentShot;
     }
 }
