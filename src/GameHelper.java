@@ -61,8 +61,7 @@ public class GameHelper {
         int shotSquare = sendBomb(attackingPlayer.getAttackedCoordinatesList(), "one");
         attackingPlayer.getAttackedCoordinatesList().add(shotSquare);
         if(attackedBoard.boardIsBombed(shotSquare)) {
-            attackedPlayer.setBoatsLeft(attackedPlayer.getBoatsLeft()-1);
-
+            attackedPlayer.setBoatsLeft(attackedPlayer.getBoatsLeft() - 1);
         }
         System.out.println("Your shots: " + attackingPlayer.getAttackedCoordinatesList());
         // PRINTA MOTSTÅNDARENS SPELPLAN MED X FÖR TRÄFF M FÖR MISS 0 FÖR ICKE BOMBADE SQUARES
@@ -72,7 +71,7 @@ public class GameHelper {
         int shotSquare = sendRandomBomb(bot.getAttackedCoordinatesList());
         bot.getAttackedCoordinatesList().add(shotSquare);
         if(attackedBoard.boardIsBombed(shotSquare)) {
-            attackedPlayer.setBoatsLeft(attackedPlayer.getBoatsLeft()-1);;
+            attackedPlayer.setBoatsLeft(attackedPlayer.getBoatsLeft() - 1);;
         }
         System.out.println("Bots shots: " + bot.getAttackedCoordinatesList());
         // PRINTA SPELARENS SPELPLAN MED X FÖR TRÄFF M FÖR MISS 0 FÖR ICKE BOMBADE SQUARES
