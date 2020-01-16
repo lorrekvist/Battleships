@@ -5,27 +5,18 @@ import java.util.Scanner;
 public class GameHelper {
     // PROBLEM MAN KAN INTE VÄLJA ALLA RUTOR
     public int getCoordinates(){
-        int xCoordinate = 0;
-        int yCoordinate = 0;
+        int coordinate = 0;
 
         do{
             try{
-                System.out.print("Input X coordinate, 1-3: ");
-                xCoordinate = new Scanner(System.in).nextInt();
+                System.out.print("Input square number, 1-9: ");
+                coordinate = new Scanner(System.in).nextInt();
             }catch(Exception InputMismatchException){
-                System.out.println("Please input an integer 1-3, nothing else.");
+                System.out.println("Please input an integer 1-9, nothing else.");
             }
-        }while(xCoordinate > 3 || xCoordinate < 1);
-        do{
-            try{
-                System.out.print("Input Y coordinate, 1-3: ");
-                yCoordinate = new Scanner(System.in).nextInt();
-            }catch(Exception InputMismatchException){
-                System.out.println("Please input an integer 1-3, nothing else.");
-            }
-        }while(yCoordinate > 3 || yCoordinate < 1);
+        }while(coordinate > 9 || coordinate < 1);
 
-        return xCoordinate * yCoordinate;
+        return coordinate;
     }
 
     public int sendBomb(ArrayList<Integer> attackCoordinationList, String player) {
