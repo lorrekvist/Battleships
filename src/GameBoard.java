@@ -44,15 +44,17 @@ public class GameBoard implements IBoard {
 
     @Override
     public void printBoardWhenBombed(int bombedCoordinate, boolean hit) {
-        for(int i = 1; i < 10; i++) {
-            if(boatPlacementsCoordsList.get(i - 1) == bombedCoordinates.get(i - 1)) {
-                System.out.print("X ");
-            } else if (bombedCoordinates.contains(i)) {
-                System.out.print("M ");
+        for (int i = 1; i < 10; i++) {
+            if (bombedCoordinates.contains(i)) {
+                if (boatPlacementsCoordsList.contains(i)) {
+                    System.out.print("X ");
+                } else {
+                    System.out.print("M ");
+                }
             } else {
                 System.out.print(i + " ");
             }
-            if(i % 3 == 0) {
+            if (i % 3 == 0) {
                 System.out.println();
             }
         }
