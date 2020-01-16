@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Player implements IPlayer{
-    ArrayList<Integer> attackedCoordinatesList = new ArrayList<Integer>();
-    int boatsLeft = boats;
+    private ArrayList<Integer> attackedCoordinatesList = new ArrayList<Integer>();
+    private int boatsLeft = boats;
 
     @Override
     public boolean hasBoatsLeft() {
@@ -12,5 +12,21 @@ public class Player implements IPlayer{
     @Override
     public ArrayList<Integer> coordinatesAttacked() {
         return attackedCoordinatesList;
+    }
+
+    public ArrayList<Integer> getAttackedCoordinatesList() {
+        return attackedCoordinatesList;
+    }
+
+    public void setAttackedCoordinatesList(ArrayList<Integer> attackedCoordinatesList) {
+        this.attackedCoordinatesList = attackedCoordinatesList;
+    }
+
+    public int getBoatsLeft() {
+        return boatsLeft;
+    }
+
+    public void setBoatsLeft(int boatsLeft) {
+        this.boatsLeft = boatsLeft;
     }
 }

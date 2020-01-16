@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class GameBoard implements IBoard {
-    ArrayList<Integer> boatPlacementsCoordsList = new ArrayList<Integer>(9);
-    ArrayList<Integer> bombedCoordinates = new ArrayList<Integer>(9);
+    private ArrayList<Integer> boatPlacementsCoordsList = new ArrayList<Integer>(9);
+    private ArrayList<Integer> bombedCoordinates = new ArrayList<Integer>(9);
 
     @Override
     public ArrayList<Integer> addBoatToBoard(int placementCoordinates) {
@@ -45,5 +45,21 @@ public class GameBoard implements IBoard {
     @Override
     public void printBoardWhenBombed(int bombedCoordinate, boolean hit) {
 
+    }
+
+    public ArrayList<Integer> getBoatPlacementsCoordsList() {
+        return boatPlacementsCoordsList;
+    }
+
+    public void setBoatPlacementsCoordsList(ArrayList<Integer> boatPlacementsCoordsList) {
+        this.boatPlacementsCoordsList = boatPlacementsCoordsList;
+    }
+
+    public ArrayList<Integer> getBombedCoordinates() {
+        return bombedCoordinates;
+    }
+
+    public void setBombedCoordinates(ArrayList<Integer> bombedCoordinates) {
+        this.bombedCoordinates = bombedCoordinates;
     }
 }
