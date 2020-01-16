@@ -3,7 +3,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameHelper {
-    // PROBLEM MAN KAN INTE VÄLJA ALLA RUTOR
     public int getCoordinates(){
         int coordinate = 0;
 
@@ -57,14 +56,13 @@ public class GameHelper {
         }
     }
 
-    public void playerAttackMove(Player attackingPlayer, Player attackedPlayer, GameBoard attackedBoard) {
-        int shotSquare = sendBomb(attackingPlayer.getAttackedCoordinatesList(), "one");
+    public void playerAttackMove(Player attackingPlayer, Player attackedPlayer, GameBoard attackedBoard, String player) {
+        int shotSquare = sendBomb(attackingPlayer.getAttackedCoordinatesList(), player);
         attackingPlayer.getAttackedCoordinatesList().add(shotSquare);
         if(attackedBoard.boardIsBombed(shotSquare)) {
             attackedPlayer.setBoatsLeft(attackedPlayer.getBoatsLeft() - 1);
         }
         System.out.println("Your shots: " + attackingPlayer.getAttackedCoordinatesList());
-        // PRINTA MOTSTÅNDARENS SPELPLAN MED X FÖR TRÄFF M FÖR MISS 0 FÖR ICKE BOMBADE SQUARES
     }
 
     public void botAttackMove(Player bot, Player attackedPlayer, GameBoard attackedBoard) {
@@ -74,6 +72,5 @@ public class GameHelper {
             attackedPlayer.setBoatsLeft(attackedPlayer.getBoatsLeft() - 1);;
         }
         System.out.println("Bots shots: " + bot.getAttackedCoordinatesList());
-        // PRINTA SPELARENS SPELPLAN MED X FÖR TRÄFF M FÖR MISS 0 FÖR ICKE BOMBADE SQUARES
     }
 }

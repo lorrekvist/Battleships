@@ -1,12 +1,3 @@
-/*
-Ett interface för Pre-game, alltså placering utav skeppen.
-Ett interface for spelet, playerturn som hanterar bombningen av skepp.
-Abstrakta klassen hanterar båten
- */
-
-
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -92,9 +83,9 @@ public class Game {
         int round = 0;
         do{
             if(round % 2 == 0) {
-                gameHelper.playerAttackMove(playerOne, playerTwo, playerTwoBoard);
+                gameHelper.playerAttackMove(playerOne, playerTwo, playerTwoBoard, "one");
             } else {
-                gameHelper.playerAttackMove(playerTwo, playerOne, playerOneBoard);
+                gameHelper.playerAttackMove(playerTwo, playerOne, playerOneBoard, "two");
             }
             round++;
         } while(playerOne.hasBoatsLeft() && playerTwo.hasBoatsLeft());
@@ -111,7 +102,7 @@ public class Game {
         int round = 0;
         do{
             if(round % 2 == 0) {
-                gameHelper.playerAttackMove(playerOne, bot, botBoard);
+                gameHelper.playerAttackMove(playerOne, bot, botBoard, "one");
             } else {
                 gameHelper.botAttackMove(bot, playerOne, playerOneBoard);
             }
