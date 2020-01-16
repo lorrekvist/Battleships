@@ -55,8 +55,8 @@ public class Game {
         do {
             System.out.println("Player one choosing coordinate to place boat on.");
             playerOneBoard.addBoatToBoard(gameHelper.getCoordinates());
-            System.out.println("Player one placements: " + playerOneBoard.boatPlacementsCoordsList);
-        } while(playerOneBoard.boatPlacementsCoordsList.size() <= 3);
+            System.out.println("Player one placements: " + playerOneBoard.getBoatPlacementsCoordsList());
+        } while(playerOneBoard.getBoatPlacementsCoordsList().size() <= 3);
         playerOneBoard.printBoardWithBoats();
         if (pvpGame){
             startPvPGame(playerOne, playerOneBoard);
@@ -71,8 +71,8 @@ public class Game {
         do {
             System.out.println("Player two choosing coordinate to place boat on.");
             playerTwoBoard.addBoatToBoard(gameHelper.getCoordinates());
-            System.out.println("Player two placements: " + playerTwoBoard.boatPlacementsCoordsList);
-        } while(playerTwoBoard.boatPlacementsCoordsList.size() <= 3);
+            System.out.println("Player two placements: " + playerTwoBoard.getBoatPlacementsCoordsList());
+        } while(playerTwoBoard.getBoatPlacementsCoordsList().size() <= 3);
         playerTwoBoard.printBoardWithBoats();
         System.out.println("Game is live!");
         startPvPWar(playerOne, playerTwo, playerOneBoard, playerTwoBoard);
@@ -81,8 +81,8 @@ public class Game {
     private void startPvEGame(Player playerOne, GameBoard playerOneBoard){
         Player bot = new Player();
         GameBoard botBoard = new GameBoard();
-        gameHelper.addBoatsToBotBoatPlacementsList(botBoard.boatPlacementsCoordsList);
-        System.out.println("Bot placements: " + botBoard.boatPlacementsCoordsList);
+        gameHelper.addBoatsToBotBoatPlacementsList(botBoard.getBoatPlacementsCoordsList());
+        System.out.println("Bot placements: " + botBoard.getBoatPlacementsCoordsList());
         botBoard.printBoardWithBoats();
         System.out.println("Game is live!");
         startPvEWar(playerOne, bot, playerOneBoard, botBoard);
